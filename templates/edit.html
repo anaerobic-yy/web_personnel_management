@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑人员信息</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>编辑人员信息</h1>
+    <form method="POST">
+        <input type="hidden" name="prev_url" value="{{ session.get('prev_url', url_for('index')) }}">
+        <label for="name">姓名:</label><br>
+        <input type="text" id="name" name="name" value="{{ record['姓名'] }}"><br><br>
+
+        <label for="gender">性别:</label><br>
+        <input type="text" id="gender" name="gender" value="{{ record['性别'] }}"><br><br>
+
+        <label for="phone">手机号码:</label><br>
+        <input type="text" id="phone" name="phone" value="{{ record['手机号码'] }}"><br><br>
+
+        <label for="email">电子邮箱:</label><br>
+        <input type="text" id="email" name="email" value="{{ record['电子邮箱'] }}"><br><br>
+
+        <button type="submit" class="button">提交</button>
+        <button type="button" class="button" onclick="window.history.back()">返回</button>
+    </form>
+</body>
+</html>

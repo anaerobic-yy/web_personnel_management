@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>查询</h1>
+
+    <!-- 显示提示信息 -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- 查询表单 -->
+    <form method="POST" action="{{ url_for('search') }}">
+        <label for="seq">输入序号:</label><br>
+        <input type="number" id="seq" name="seq" required><br><br>
+        <button type="submit" class="button">查询</button>
+    </form>
+
+    <!-- 显示查询结果 -->
+    {% if person %}
+    <h2>查询结果</h2>
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>手机号码</th>
+            <th>电子邮箱</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>{{ person['序号'] }}</td>
+            <td>{{ person['姓名'] }}</td>
+            <td>{{ person['性别'] }}</td>
+            <td>{{ person['手机号码'] }}</td>
+            <td>{{ person['电子邮箱'] }}</td>
+            <td><a href="{{ url_for('edit', id=person['序号']) }}">编辑</a></td>
+        </tr>
+    </table>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('index') }}" class="button">返回首页</a>
+</body>
+</html>

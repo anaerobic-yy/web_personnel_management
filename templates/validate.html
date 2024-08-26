@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>错误数据结果</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>错误数据验证结果</h1>
+
+    {% if error_categories %}
+
+        {% for category, errors in error_categories.items() %}
+            <!-- 获取错误类别的总数 -->
+            {% set category_count = error_summary | selectattr('错误类别', 'equalto', category) | first %}
+            <h2>{{ category }}错误（共{{ category_count['count'] }}个）</h2>
+            <table border="1">
+                <tr>
+                    <th>错误序号</th>
+                    <th>人员序号</th>
+                    <th>错误内容</th>
+                    <th>操作</th>
+                </tr>
+                {% for error in errors %}
+                <tr>
+                    <td>{{ error['序号']}}</td>
+                    <td>{{ error['人员信息表序号'] }}</td>
+                    <td>{{ error['错误内容'] }}</td>
+                    <td>
+                        <a href="{{ url_for('edit', id=error['人员信息表序号']) }}">编辑</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    {% else %}
+    <p>所有数据均符合规则。</p>
+    {% endif %}
+    <h2 style="text-align:right"><a href="{{ url_for('index') }}">返回</a></h2>
+</body>
+</html>

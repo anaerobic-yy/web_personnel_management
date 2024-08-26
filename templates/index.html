@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员信息管理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* 在两侧对齐按钮 */
+            gap: 10px; /* 按钮之间的间距 */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>人员信息表</h1>
+    <div class="button-container">
+        <a href="{{ url_for('validate') }}" class="button">错误数据判断 </a>
+        <a href="{{ url_for('search') }}" class="button">查询用户</a>
+        <a href="{{ url_for('add') }}" class="button">新增</a>
+    </div>
+    <br>
+        <!-- 显示提示信息 -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    <br>
+    
+    <!-- 显示人员信息表 -->
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>手机号码</th>
+            <th>电子邮箱</th>
+            <th>操作</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record['序号'] }}</td>
+            <td>{{ record['姓名'] }}</td>
+            <td>{{ record['性别'] }}</td>
+            <td>{{ record['手机号码'] }}</td>
+            <td>{{ record['电子邮箱'] }}</td>
+            <td>
+                <a href="{{ url_for('edit', id=record['序号']) }}">编辑</a>
+                <a href="{{ url_for('delete', id=record['序号']) }}" style="color: red;">删除</a>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

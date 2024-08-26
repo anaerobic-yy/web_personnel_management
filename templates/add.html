@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+      .button-container {
+          display: flex;
+          justify-content: flex-start; /* 左侧对齐按钮 */
+          gap: 10px; /* 按钮之间的间距 */
+          margin-top: 20px;
+      }
+  </style>
+</head>
+<body>
+    <h1>新增</h1>
+    <!-- 显示提示信息 -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+    <form method="POST" action="{{ url_for('add') }}">
+        <label for="name">姓名:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="gender">性别:</label><br>
+        <input type="text" id="gender" name="gender"><br><br>
+
+        <label for="phone">手机号码:</label><br>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <label for="email">电子邮箱:</label><br>
+        <input type="text" id="email" name="email"><br><br>
+
+        <div class = "button-container">
+          <button type="submit" class="button">提交</button> 
+        <a href="{{ url_for('index') }}" class="button">返回</a>
+        </div>
+    </form>
+</body>
+</html>
