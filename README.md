@@ -1,8 +1,6 @@
 # web_personnel_management
 
-简介：使用python的flask框架搭建小型web页面，使用html/CSS前端设计，连接
-
-mysql后台数据库，实现人员信息的数据筛查和增删改查。
+简介：使用python的flask框架搭建小型web页面，使用html/CSS前端设计，连接mysql后台数据库，实现人员信息的数据筛查和增删改查。
 
 ## 功能
 
